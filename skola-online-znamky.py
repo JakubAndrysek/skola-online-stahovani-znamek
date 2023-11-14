@@ -10,6 +10,7 @@ import re
 import requests
 from bs4 import BeautifulSoup
 from prettytable import PrettyTable
+import maskpass
 
 session = requests.Session()
 
@@ -138,7 +139,10 @@ def print_pretty_table(marks: list):
 
 
 if __name__ == '__main__':
-    log_in_sol('username', 'password')
+    username = input("Zadejte uživatelské jméno: ")
+    password = maskpass.askpass(prompt="Zadejte heslo: ", mask="*")  
+
+    log_in_sol(username, password)
     scrape_sol_to_file()
 
     html_content = load_mark_from_file()
